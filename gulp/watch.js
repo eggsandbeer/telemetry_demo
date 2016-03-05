@@ -5,12 +5,13 @@ var browserify  = require('browserify');
 var babelify    = require('babelify');
 var notify      = require('gulp-notify');
 var gutil       = require('gulp-util');
+var glob        = require('glob');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 var log         = require('log4js').getLogger('watcher');
 var livereload  = require('gulp-livereload');
 
-function rebundleFile(fileBundler, destFile) {
+var rebundleFile = function (fileBundler, destFile) {
   fileBundler
     .bundle()
     .on('error', notify.onError(function(error) {
@@ -20,10 +21,10 @@ function rebundleFile(fileBundler, destFile) {
     .pipe(source(destFile))
     .pipe(gulp.dest('public/javascripts/built'))
     .pipe(reload({stream: true}));
-    log.info(destFile + ' build successful');
+    log.info('apps.js build successful');
 }
 
-function initBundlerWatch(bundler, fileName) {
+var initBundlerWatch = function(bundler, fileName) {
   bundler.transform(babelify)
     .on('update', function() {
       rebundleFile(bundler, fileName);
@@ -31,7 +32,32 @@ function initBundlerWatch(bundler, fileName) {
   rebundleFile(bundler, fileName);
 }
 
+var testFiles = glob.sync('./specs/**/*-spec.js');
+
+var testBundler = browserify({
+  entries: testFiles,
+  debug: true, // Gives us sourcemapping
+  transform: [babelify],
+  cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
+});
+
+var rebundleTests = function () {
+  var start = Date.now();
+  testBundler.bundle()
+  .on('error', gutil.log)
+    .pipe(source('specs.js'))
+    .pipe(gulp.dest('test/'))
+    .pipe(livereload())
+    log.info('specs.js build successful');
+};
+
 gulp.task('app_watch', function() {
   var appBundler = watchify(browserify('./client/javascript/App.jsx', watchify.args));
   initBundlerWatch(appBundler, 'app.js');
+});
+
+gulp.task('test_watch', function() {
+  testBundler = watchify(testBundler);
+  testBundler.on('update', rebundleTests);
+  rebundleTests();
 });

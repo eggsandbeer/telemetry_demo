@@ -21,11 +21,11 @@ describe("LoginStore and LoginActions", function(){
       });
 
 
-    it("handle logging in a user", function () {
+    it("handle logging in a user.", function () {
 
       MemberActions.loginUser({
         authToken: 609238409832,
-        user: 'cameron'
+        user: 'Cameron'
       });
       jasmine.clock().tick(); // Advance the clock to the next tick
 
@@ -34,9 +34,6 @@ describe("LoginStore and LoginActions", function(){
       expect(loggedIn).toBe(true);
     });
   });
-
-
-
 });
 
 // describe("Login", function() {

@@ -7,6 +7,8 @@
   var shell = require('gulp-shell');
   var nodemon = require('gulp-nodemon');
   var env = process.env.NODE_ENV || 'development';
+  var webserver = require('gulp-webserver');
+
 
   // Testing
   var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
@@ -47,13 +49,9 @@
 
   gulp.task('move_assets', function() { runSequence('move_fonts', 'move_images', 'move_scripts'); });
 
-  gulp.task('dev:build_app', ['dev:build_js', 'build_vendor_css', 'move_assets']);
+  gulp.task('dev:build_app', ['dev:build_js', 'test:build_vendor_js', 'build_vendor_css', 'move_assets']);
 
   gulp.task('build', function() { runSequence('repo:clean', ['prod:build_js', 'build_vendor_css', 'move_assets', 'minify_style']); });
 
-  gulp.task('test', function () {
-    return gulp.src('./build/testrunner-phantomjs.html').pipe(jasminePhantomJs());
-  });
-
-  gulp.task('default', function() { runSequence('repo:clean', 'dev:build_app', ['build_css', 'nodemon', 'app_watch']); });
+  gulp.task('default', function() { runSequence('repo:clean', 'dev:build_app', ['build_css', 'nodemon', 'app_watch', 'test_watch']); });
 })();

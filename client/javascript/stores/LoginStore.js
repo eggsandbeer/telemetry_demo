@@ -20,7 +20,6 @@ class LoginStore extends EventEmitter {
   }
 
   _registerToActions(action) {
-    console.log('FUDGEBUTTON')
     switch(action.actionType) {
       case LOGIN_USER:
         _authToken = action.data.authToken;

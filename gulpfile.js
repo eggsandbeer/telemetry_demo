@@ -8,6 +8,9 @@
   var nodemon = require('gulp-nodemon');
   var env = process.env.NODE_ENV || 'development';
 
+  // Testing
+  var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
+
   requireDir('./gulp', { recurse: true });
 
   gulp.task('repo:setup', ['npm:install']);
@@ -47,6 +50,10 @@
   gulp.task('dev:build_app', ['dev:build_js', 'build_vendor_css', 'move_assets']);
 
   gulp.task('build', function() { runSequence('repo:clean', ['prod:build_js', 'build_vendor_css', 'move_assets', 'minify_style']); });
+
+  gulp.task('test', function () {
+    return gulp.src('./build/testrunner-phantomjs.html').pipe(jasminePhantomJs());
+  });
 
   gulp.task('default', function() { runSequence('repo:clean', 'dev:build_app', ['build_css', 'nodemon', 'app_watch']); });
 })();

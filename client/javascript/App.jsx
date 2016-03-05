@@ -10,6 +10,7 @@ import { hashHistory } from 'react-router';
 
 import MainContainer from './components/MainContainer.jsx';
 import Login from './components/Login.jsx';
+import LoggedIn from './components/LoggedIn.jsx';
 
 import LoginActions from './actions/LoginActions';
 import LoginStore from './stores/LoginStore';
@@ -27,28 +28,29 @@ class NoMatch extends React.Component {
 
 var redirectToChild = (location, replaceWith) => {
   let isLoggedIn = LoginStore.isLoggedIn();
+
   if (!isLoggedIn) {
     replaceWith(null, '/login');
   } else {
-    replaceWith(null, '/loggedIn');
+    replaceWith(null, '/loggedin');
   }
 }
 
 var requireAuth = (nextState, replace) => {
   let isLoggedIn = LoginStore.isLoggedIn();
   if (!isLoggedIn) {
-    replace({ nextPathname: nextState.location.pathname }, '/login');
+    replace('/login');
   }
 }
 
 
 ReactDOM.render(
   <StyleRoot>
-
     <Router history={hashHistory}>
       <Route path="/" component={MainContainer}>
         <IndexRoute onEnter={redirectToChild} />
         <Route path="login" component={Login} />
+        <Route path="loggedin" component={LoggedIn} onEnter={requireAuth} />
         <Route path="*" component={NoMatch} />
       </Route>
     </Router>

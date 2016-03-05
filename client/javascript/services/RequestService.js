@@ -10,28 +10,34 @@ class RequestService {
     var localData = JSON.parse(localStorage.getItem(AUTH_KEY));
     var xToken = (localData && localData.authToken) ? localData.authToken : "";
 
-    var defaultOpts =  {
+    var defaultOpts = {
       headers: { 'x-authentication-token': xToken },
       crossOrigin: false,
       json: true
     }
 
-    Object.assign(requestOptions, defaultOpts);
+    Object.assign(requestOptions, defaultOpts)
 
-    request(requestOptions)
-      .then(function(data) {
-        let response = data[1];
-        if (clientError(response)) {
-          if (response.error) {
-            ErrorActions.showError(response.error);
-          }
-          if (response.code == 401) {
-            LoginActions.invalidateUser();
-          }
-        } else {
-          callback(response);
+    // request(requestOptions).then(function(){});
+
+    setTimeout(function(){
+      let response ={
+        code: 200,
+        authToken: '09309379879686',
+        user: requestOptions.body.email
+      }
+
+      if (clientError(response)) {
+        if (response.error) {
+          ErrorActions.showError(response.error);
         }
-      });
+        if (response.code == 401) {
+          LoginActions.invalidateUser();
+        }
+      } else {
+        callback(response);
+      }
+    }, 500);
   }
 }
 

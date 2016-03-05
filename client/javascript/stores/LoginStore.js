@@ -20,6 +20,7 @@ class LoginStore extends EventEmitter {
   }
 
   _registerToActions(action) {
+    console.log('FUDGEBUTTON')
     switch(action.actionType) {
       case LOGIN_USER:
         _authToken = action.data.authToken;
@@ -58,7 +59,11 @@ class LoginStore extends EventEmitter {
   }
 
   isLoggedIn() {
-    return _user && _authToken;
+    if ( _user && _authToken ) {
+      return true
+    } else {
+      return false
+    }
   }
 }
 

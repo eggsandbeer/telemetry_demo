@@ -26,7 +26,7 @@ class MainContainer extends React.Component {
     });
 
     if (this.state.loggedIn) {
-      this.props.history.pushState(null, `/loggedIn`);
+      this.props.history.push('/loggedIn');
     }
   }
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import Radium from 'radium';
+import Radium, {Style, StyleRoot} from 'radium';
 import Auth from '../services/AuthService';
-import {Style, StyleRoot} from 'radium';
 
 import BaseStyles from './base/base_styles.js'
 
@@ -143,4 +142,4 @@ class Login extends React.Component {
   }
 }
 
-module.exports = Radium({isRoot: true})(Login);
+module.exports = Radium(Login);

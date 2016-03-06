@@ -100,7 +100,7 @@ class Login extends React.Component {
 
        <div className="loginContainer">
           <div className="row">
-            <div className="col-sm-offset-3 col-sm-6" style={styles.header}>
+            <div style={styles.header}>
               <img style={styles.logo} alt="Telemtry Logo" src="./images/logo-full-medium.png" />
             </div>
           </div>

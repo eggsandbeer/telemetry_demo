@@ -9,10 +9,6 @@
   var env = process.env.NODE_ENV || 'development';
   var webserver = require('gulp-webserver');
 
-
-  // Testing
-  var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
-
   requireDir('./gulp', { recurse: true });
 
   gulp.task('repo:setup', ['npm:install']);
@@ -49,9 +45,9 @@
 
   gulp.task('move_assets', function() { runSequence('move_fonts', 'move_images', 'move_scripts'); });
 
-  gulp.task('dev:build_app', ['dev:build_js', 'test:build_vendor_js', 'build_vendor_css', 'move_assets']);
+  gulp.task('dev:build_app', ['test:build_vendor_js', 'build_vendor_css', 'build_css', 'move_assets', 'dev:build_js']);
 
-  gulp.task('build', function() { runSequence('repo:clean', ['prod:build_js', 'build_vendor_css', 'move_assets', 'minify_style']); });
+  gulp.task('build', function() { runSequence('repo:clean', ['prod:build_js', 'build_vendor_css', 'minify_style', 'move_assets', 'nodemon' ]); });
 
-  gulp.task('default', function() { runSequence('repo:clean', 'dev:build_app', ['build_css', 'nodemon', 'app_watch', 'test_watch']); });
+  gulp.task('default', function() { runSequence('repo:clean', ['dev:build_app', 'nodemon', 'test_watch', 'app_watch']); });
 })();

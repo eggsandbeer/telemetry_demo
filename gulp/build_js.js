@@ -22,11 +22,12 @@ gulp.task('dev:build_js', function() {
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('public/javascripts/built'));
+    log.info('apps.js - dev version built successful');
 });
 
 gulp.task('prod:build_js', function() {
   browserify('./client/javascript/App.jsx', {
-    debug: true,
+    debug: false,
     transform: [babelify]
   })
     .bundle()
@@ -37,6 +38,7 @@ gulp.task('prod:build_js', function() {
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest('public/javascripts/built'));
+    log.info('apps.js - prod version built successful');
 });
 
 gulp.task('test:build_vendor_js', function(){
@@ -57,7 +59,6 @@ gulp.task('test:build_vendor_js', function(){
   vendorsBundler.bundle()
     .on('error', gutil.log)
     .pipe(source('vendors.js'))
-    // .pipe(gulpif(!options.development, streamify(uglify())))
     .pipe(gulp.dest('test/'))
     .pipe(notify(function () {
       console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');

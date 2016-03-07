@@ -47,7 +47,7 @@ var rebundleTests = function () {
   .on('error', gutil.log)
     .pipe(source('specs.js'))
     .pipe(gulp.dest('test/'))
-    .pipe(livereload())
+    .pipe(livereload());
     log.info('specs.js build successful');
 };
 

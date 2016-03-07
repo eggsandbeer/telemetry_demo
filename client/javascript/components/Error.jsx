@@ -13,7 +13,7 @@ class Error extends React.Component {
       errorMessage: ErrorStore.errorMessage
     }
     this.changeListener = this.onChange.bind(this);
-    
+
   }
 
   shouldRender() {
@@ -44,6 +44,7 @@ class Error extends React.Component {
         </Alert>
       )
     }
+    
     return null
   }
 }

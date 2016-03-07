@@ -36,52 +36,50 @@ describe("LoginStore and LoginActions", function(){
   });
 });
 
-// describe("Login", function() {
-//
-//   it('changes the text after click', function() {
-//
-//     console.log(TestUtils)
-//
-//     var login = TestUtils.renderIntoDocument(
-//       <Login/>
-//     );
-//
-//     var loginNode = ReactDOM.findDOMNode(login);
-//
-//     // console.log(loginNode);
-//
-//     // Verify that it's Off by default
-//     expect(loginNode.error).toEqual(undefined);
-//
-//     // Simulate a click and verify that it is now On
-//     // TestUtils.Simulate.change(
-//     //   TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
-//     // );
-//     // expect(checkboxNode.textContent).toEqual('On');
-//   });
-//
-//   it('changes the text after click', function() {
-//
-//     console.log(TestUtils)
-//
-//     var mainContainer = TestUtils.renderIntoDocument(
-//       <MainContainer/>
-//     );
-//
-//     var mainContainerNode = ReactDOM.findDOMNode(mainContainer);
-//
-//     // console.log(loginNode);
-//
-//     // Verify that it's Off by default
-//     expect(mainContainerNode.error).toEqual(undefined);
-//
-//     // Simulate a click and verify that it is now On
-//     // TestUtils.Simulate.change(
-//     //   TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
-//     // );
-//     // expect(checkboxNode.textContent).toEqual('On');
-//   });
-//
-//
-//
-// });
+describe("Login", function() {
+
+  it('changes the text after click', function() {
+
+    var login = TestUtils.renderIntoDocument(
+      <Login/>
+    );
+
+    var loginNode = ReactDOM.findDOMNode(login);
+
+    // console.log(loginNode);
+
+    // Verify that it's Off by default
+    expect(loginNode.error).toEqual(undefined);
+
+    // Simulate a click and verify that it is now On
+    // TestUtils.Simulate.change(
+    //   TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
+    // );
+    // expect(checkboxNode.textContent).toEqual('On');
+  });
+
+  it('changes the text after click', function() {
+
+    console.log(TestUtils)
+
+    var mainContainer = TestUtils.renderIntoDocument(
+      <MainContainer/>
+    );
+
+    var mainContainerNode = ReactDOM.findDOMNode(mainContainer);
+
+    // console.log(loginNode);
+
+    // Verify that it's Off by default
+    expect(mainContainerNode.error).toEqual(undefined);
+
+    // Simulate a click and verify that it is now On
+    // TestUtils.Simulate.change(
+    //   TestUtils.findRenderedDOMComponentWithTag(checkbox, 'input')
+    // );
+    // expect(checkboxNode.textContent).toEqual('On');
+  });
+
+
+
+});

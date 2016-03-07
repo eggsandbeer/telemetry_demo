@@ -2,8 +2,6 @@ var BASE_URL = window.location.origin + '/';
 
 export default {
   BASE_URL: BASE_URL,
-  GA_KEY: 'ga:clientId',
-  IMAGE_DEFAULTS: '?resize=900:*&output-format=jpeg&output-quality=100',
 
   // ERROR STORE
   NEW_ERROR: 'NEW_ERROR',

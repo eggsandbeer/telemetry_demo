@@ -23,6 +23,10 @@ var BaseStyles = {
     margin: '1%',
     zIndex: 1
   },
+  inputError: {
+    border: '2px solid #BB0000',
+    backgroundColor: '#F2DEDE'
+  },
   // Colors
   'backGroundColor': '#f4f4f4',
   'mainFontColor': '#02000e',

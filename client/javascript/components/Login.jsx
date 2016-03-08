@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium, {Style, StyleRoot} from 'radium';
 import Auth from '../services/AuthService';
+import ErrorActions from '../actions/ErrorActions';
 
 import BaseStyles from './base/base_styles.js'
 
@@ -11,23 +12,48 @@ class Login extends React.Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      email_error: false,
+      password_error: false
     };
   }
 
   login(e) {
     e.preventDefault();
-    Auth.login(this.state.email, this.state.password);
+
+    this.render()
+    if(this.state.email.length < 8) {
+      ErrorActions.showError('Your username should be longer than 8 characters long.');
+      this.setState({
+        email_error: true
+      });
+    } else if (this.state.password.length < 8){
+      ErrorActions.showError('Your password should be longer than 8 characters long.');
+      this.setState({
+        password_error: true
+      });
+
+    } else if (this.state.password = 'password') {
+      ErrorActions.showError('"password" is not an acceptable password. Please come up with something more complex.');
+      this.setState({
+        password_error: true
+      });
+
+    } else {
+      Auth.login(this.state.email, this.state.password);
+    }
   }
 
   handleEmailChange(e) {
     this.setState({
+      email_error: false,
       email: e.target.value
     });
   }
 
   handlePasswordChange(e) {
     this.setState({
+      password_error: false,
       password: e.target.value
     });
   }
@@ -74,6 +100,16 @@ class Login extends React.Component {
       }
     }
 
+    var password_error_style;
+    if (this.state.password_error) {
+      var password_error_style = BaseStyles.inputError;
+    }
+
+    var email_error_style;
+    if (this.state.email_error) {
+      var email_error_style = BaseStyles.inputError;
+    }
+
     return (
       <div style={styles.containerWrapper}>
         <Style
@@ -113,7 +149,7 @@ class Login extends React.Component {
                 id="email"
                 placeholder="Username"
                 ref="username_input"
-                style={styles.inputs}
+                style={[styles.inputs, email_error_style]}
               />
             </div>
           </div>
@@ -126,7 +162,7 @@ class Login extends React.Component {
                 id="password"
                 ref="password_input"
                 placeholder="Password"
-                style={styles.inputs}
+                style={[styles.inputs, password_error_style]}
               />
             </div>
           </div>

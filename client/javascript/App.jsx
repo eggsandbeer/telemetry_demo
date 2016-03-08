@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Style, StyleRoot} from 'radium';
-import ReactRouter, { Router, Route, Link, IndexRoute,hashHistory } from 'react-router';
-
+import ReactRouter, { Router, Route, Link, IndexRoute, hashHistory } from 'react-router';
 
 import MainContainer from './components/MainContainer.jsx';
 import Login from './components/Login.jsx';
@@ -19,7 +18,7 @@ class NoMatch extends React.Component {
       </div>
     )
   }
-}
+};
 
 var redirectToChild = (location, replaceWith) => {
   let isLoggedIn = LoginStore.isLoggedIn();
@@ -29,14 +28,14 @@ var redirectToChild = (location, replaceWith) => {
   } else {
     replaceWith(null, '/loggedin');
   }
-}
+};
 
 var requireAuth = (nextState, replace) => {
   let isLoggedIn = LoginStore.isLoggedIn();
   if (!isLoggedIn) {
     replace('/login');
   }
-}
+};
 
 
 ReactDOM.render(
@@ -50,4 +49,4 @@ ReactDOM.render(
       </Route>
     </Router>
   </StyleRoot>, document.getElementById('MainContainer')
-)
+);

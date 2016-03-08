@@ -10,6 +10,7 @@ class MainContainer extends React.Component {
 
   constructor() {
     super();
+    
     this.state = {
       loggedIn: LoginStore.isLoggedIn()
     }

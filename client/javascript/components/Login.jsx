@@ -112,6 +112,7 @@ class Login extends React.Component {
                 className="form-control"
                 id="email"
                 placeholder="Username"
+                ref="username_input"
                 style={styles.inputs}
               />
             </div>
@@ -123,7 +124,7 @@ class Login extends React.Component {
                 onChange={this.handlePasswordChange.bind(this)}
                 className="form-control"
                 id="password"
-                ref="password"
+                ref="password_input"
                 placeholder="Password"
                 style={styles.inputs}
               />
@@ -133,6 +134,7 @@ class Login extends React.Component {
             type="submit"
             style={[BaseStyles.blueActionButton, styles.login_button]}
             onClick={this.login.bind(this)}
+            ref="login_button"
           >
             LOGIN
           </button>

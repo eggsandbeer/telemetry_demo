@@ -49,5 +49,5 @@
 
   gulp.task('build', function() { runSequence('repo:clean', ['prod:build_js', 'build_vendor_css', 'minify_style', 'move_assets', 'nodemon' ]); });
 
-  gulp.task('default', function() { runSequence('repo:clean', ['dev:build_app', 'nodemon', 'test_watch', 'app_watch']); });
+  gulp.task('default', function() { runSequence('repo:clean', ['dev:build_app', 'test_watch', 'app_watch', 'nodemon']); });
 })();

@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactRouter from 'react-router';
 import {Style, StyleRoot} from 'radium';
-import { Router } from 'react-router';
-import { Route } from 'react-router';
-import { Link } from 'react-router';
-import { IndexRoute } from 'react-router';
-import { hashHistory } from 'react-router';
+import ReactRouter, { Router, Route, Link, IndexRoute,hashHistory } from 'react-router';
+
 
 import MainContainer from './components/MainContainer.jsx';
 import Login from './components/Login.jsx';
@@ -24,7 +20,6 @@ class NoMatch extends React.Component {
     )
   }
 }
-
 
 var redirectToChild = (location, replaceWith) => {
   let isLoggedIn = LoginStore.isLoggedIn();

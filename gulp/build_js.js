@@ -45,10 +45,12 @@ gulp.task('test:build_vendor_js', function(){
 
   var dependencies = [
   	'react',
+    'react-router',
     'react/addons',
     'flux',
     'radium'
   ];
+
   // Run the vendor bundle
   var vendorsBundler = browserify({
     debug: true,
@@ -61,6 +63,6 @@ gulp.task('test:build_vendor_js', function(){
     .pipe(source('vendors.js'))
     .pipe(gulp.dest('test/'))
     .pipe(notify(function () {
-      console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
+      console.log('VENDORS test js bundle built in ' + (Date.now() - start) + 'ms');
     }));
 });
